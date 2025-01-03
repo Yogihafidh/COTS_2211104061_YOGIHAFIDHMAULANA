@@ -1,4 +1,7 @@
+import 'package:coding_on_the_spot/modules/board_page/view/chatpage.dart';
 import 'package:coding_on_the_spot/modules/board_page/view/homepage.dart';
+import 'package:coding_on_the_spot/modules/board_page/view/orderpage.dart';
+import 'package:coding_on_the_spot/modules/board_page/view/promopage.dart';
 import 'package:coding_on_the_spot/modules/login/login.dart';
 import 'package:coding_on_the_spot/modules/onboarding/view/onboarding_page.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +33,19 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/homepage',
-          page: () => Homepage(),
+          page: () => HomePage(),
+        ),
+        GetPage(
+          name: '/promos',
+          page: () => PromosPage(),
+        ),
+        GetPage(
+          name: '/order',
+          page: () => OrderPage(),
+        ),
+        GetPage(
+          name: '/chat',
+          page: () => ChatPage(),
         ),
       ],
       unknownRoute: GetPage(

@@ -10,14 +10,14 @@ class BottomNavbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.07),
             blurRadius: 10,
-            offset: Offset(0, -6),
+            offset: const Offset(0, -6),
           ),
         ],
       ),
@@ -25,55 +25,66 @@ class BottomNavbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           // Ikon Home
-          IconButton(
-            icon: Icon(
-              Icons.home,
-              color: currentIndex == 0 ? AppColors.green : AppColors.grey,
-            ),
-            onPressed: () {
-              if (currentIndex != 0) {
-                Get.offNamed('/home');
-              }
-            },
+          _buildNavItem(
+            index: 0,
+            icon: Icons.home_rounded,
+            label: 'Home',
+            routeName: '/homepage',
           ),
-          // Ikon History
-          IconButton(
-            icon: Icon(
-              Icons.discount_rounded,
-              weight: 600,
-              color: currentIndex == 1 ? AppColors.green : AppColors.grey,
-            ),
-            onPressed: () {
-              if (currentIndex != 1) {
-                Get.offNamed('/promos');
-              }
-            },
+          // Ikon Promos
+          _buildNavItem(
+            index: 1,
+            icon: Icons.discount_rounded,
+            label: 'Promos',
+            routeName: '/promos',
           ),
-          // Tombol Input
-          IconButton(
-            icon: Icon(
-              Icons.edit_document,
-              weight: 600,
-              color: currentIndex == 3 ? AppColors.green : AppColors.grey,
-            ),
-            onPressed: () {
-              if (currentIndex != 3) {
-                Get.offNamed('/order');
-              }
-            },
+          // Ikon Order
+          _buildNavItem(
+            index: 2,
+            icon: Icons.edit_document,
+            label: 'Order',
+            routeName: '/order',
           ),
-          // Ikon Settings
-          IconButton(
-            icon: Icon(
-              Icons.chat,
-              weight: 600,
-              color: currentIndex == 4 ? AppColors.green : AppColors.grey,
+          // Ikon Chat
+          _buildNavItem(
+            index: 3,
+            icon: Icons.chat_rounded,
+            label: 'Chat',
+            routeName: '/chat',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNavItem({
+    required int index,
+    required IconData icon,
+    required String label,
+    required String routeName,
+  }) {
+    bool isActive = currentIndex == index;
+    return GestureDetector(
+      onTap: () {
+        if (!isActive) {
+          Get.toNamed(routeName);
+        }
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            icon,
+            color: isActive ? AppColors.green : AppColors.grey,
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isActive ? AppColors.green : AppColors.grey,
+              fontSize: 12,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
             ),
-            onPressed: () {
-              if (currentIndex != 4) {
-                Get.offNamed('/chat');
-              }
-            },
           ),
         ],
       ),
